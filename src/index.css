@@ -1,0 +1,7 @@
+.message {
+  margin: 100px auto;
+  width: fit-content;
+  color: darkgreen;
+  font-family: sans-serif;
+  font-size: 5em;
+}
