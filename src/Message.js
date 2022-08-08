@@ -1,9 +1,7 @@
-import React from 'react';
+import React from "react";
 
 function Message(props) {
-  return (
-    <h1 className="message">Hello {props.name}</h1>
-  );
+  return <h3 className="message">&laquo; {props.text} &raquo;</h3>;
 }
 
 export default Message;
