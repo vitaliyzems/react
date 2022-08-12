@@ -1,8 +1,11 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
+import { TextField, Button } from "@mui/material";
 
 function Form(props) {
   let [messageText, setMessageText] = useState("");
   let [messageAuthor, setMessageAuthor] = useState("");
+
+  const inputEl = useRef(null);
 
   const textHandle = (event) => {
     setMessageText((messageText = event.target.value));
@@ -22,25 +25,32 @@ function Form(props) {
       props.addNewMessage(newMessage);
       setMessageText((messageText = ""));
       setMessageAuthor((messageAuthor = ""));
+      inputEl.current.focus();
     }
     event.preventDefault();
   };
 
   return (
     <form className="messageForm" onSubmit={handler}>
-      <input
-        className="messageText"
-        value={messageText}
-        onChange={textHandle}
-        placeholder="Введите сообщение"
-      />
-      <input
-        className="messageAuthor"
+      <TextField
         value={messageAuthor}
         onChange={authorHandle}
-        placeholder="Как вас зовут?"
+        id="standard-basic"
+        label="Ваше имя"
+        variant="standard"
+        inputRef={inputEl}
       />
-      <button className="messageSubmit">Отправить</button>
+      <TextField
+        value={messageText}
+        onChange={textHandle}
+        id="standard-basic"
+        label="Сообщение"
+        variant="standard"
+        margin="normal"
+      />
+      <Button type="submit" variant="outlined">
+        Отправить
+      </Button>
     </form>
   );
 }
