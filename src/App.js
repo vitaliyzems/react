@@ -1,40 +1,52 @@
-import React, { useState } from "react";
-import { Route, Routes } from "react-router-dom";
-import HomePage from "./pages/HomePage.js";
-import ChatsPage from "./pages/ChatsPage.js";
-import ProfilePage from "./pages/ProfilePage.js";
-import Layout from "./components/Layout.jsx";
-import SingleChatPage from "./pages/SingleChatPage.jsx";
-import NotFoundPage from "./pages/NotFoundPage";
+import { useDispatch, useSelector } from "react-redux";
+
+const styles = {
+  wrapper: {
+    width: "fit-content",
+    display: "flex",
+    margin: "100px auto 0",
+    alignItems: "center",
+  },
+  button: {
+    width: "50px",
+    height: "30px",
+    border: "none",
+    borderRadius: "10px",
+    backgroundColor: "rgb(43, 129, 129)",
+    color: "white",
+  },
+  counter: {
+    width: "100px",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    fontSize: "30px",
+    fontWeight: "bold",
+  },
+};
 
 function App() {
-  let [chatList, setChatList] = useState([
-    { id: 1, name: "Виктор" },
-    { id: 2, name: "Дмитрий" },
-    { id: 3, name: "Екатерина" },
-    { id: 4, name: "Тимур" },
-    { id: 5, name: "Анастасия" },
-  ]);
+  const dispatch = useDispatch();
+  const counter = useSelector((state) => state.counter);
+
+  const increaseCounter = () => {
+    dispatch({ type: "INCREASE" });
+  };
+
+  const decreaseCounter = () => {
+    dispatch({ type: "DECREASE" });
+  };
+
   return (
-    <>
-      <Routes>
-        <Route path="/" element={<Layout />}>
-          <Route index element={<HomePage />} />
-          <Route
-            path="/chats"
-            element={
-              <ChatsPage chatList={chatList} setChatList={setChatList} />
-            }
-          />
-          <Route
-            path="/chats/:id"
-            element={<SingleChatPage chatList={chatList} />}
-          />
-          <Route path="/profile" element={<ProfilePage />} />
-          <Route path="/*" element={<NotFoundPage />} />
-        </Route>
-      </Routes>
-    </>
+    <div style={styles.wrapper}>
+      <button style={styles.button} onClick={() => decreaseCounter()}>
+        -
+      </button>
+      <p style={styles.counter}>{counter}</p>
+      <button style={styles.button} onClick={() => increaseCounter()}>
+        +
+      </button>
+    </div>
   );
 }
 
