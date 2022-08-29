@@ -1,10 +1,14 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import Message from "./Message";
 
-function Messages({ messageList }) {
+function Messages({ id }) {
+  const messages = useSelector((state) => state.messages.messages);
+  const filteredMessages = messages.filter((message) => message.chatId === id);
+
   return (
     <div className="messageList">
-      {messageList.map((message) => {
+      {filteredMessages.map((message) => {
         return (
           <Message
             key={message.id}

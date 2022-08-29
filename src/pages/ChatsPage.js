@@ -1,11 +1,11 @@
 import React from "react";
 import ChatList from "../components/ChatList";
 
-function ChatsPage({ chatList, setChatList }) {
+function ChatsPage() {
   return (
     <>
       <div className="container">
-        <ChatList chatList={chatList} setChatList={setChatList} />
+        <ChatList />
       </div>
     </>
   );

@@ -1,33 +1,23 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import Form from "../components/Form";
 import Messages from "../components/Messages";
 import ModalBotAnswer from "../components/ModalBotAnswer";
+import { getChatList } from "../store/chatReduser/selectors";
 
-function SingleChatPage({ chatList }) {
-  let [messageList, setMessageList] = useState([]);
+function SingleChatPage() {
   let [botMessage, setBotMessage] = useState([]);
+  const chatList = useSelector(getChatList);
 
   const { id } = useParams();
   const name = chatList.find((chat) => chat.id === Number(id))?.name;
 
-  useEffect(() => {
-    setTimeout(() => {
-      if (messageList.length) {
-        setBotMessage([messageList[messageList.length - 1].author]);
-      }
-    }, 1500);
-  }, [messageList]);
-
-  const addNewMessage = (message) => {
-    setMessageList((messageList = [...messageList, message]));
-  };
-
   return (
     <div className="chatPageWrapper container">
       <h1 className="chatName">{name}</h1>
-      <Form addNewMessage={addNewMessage} />
-      <Messages messageList={messageList} />
+      <Form id={id} />
+      <Messages id={id} />
       <ModalBotAnswer handler={setBotMessage} author={botMessage[0]} />
     </div>
   );

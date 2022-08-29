@@ -1,10 +1,16 @@
 import { DeleteOutline } from "@mui/icons-material";
 import { Button, TextField } from "@mui/material";
 import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { getChatList } from "../store/chatReduser/selectors";
 
-function ChatList({ chatList, setChatList }) {
+function ChatList() {
   let [newChatName, setNewChatName] = useState("");
+  const chatList = useSelector(getChatList);
+  const dispatch = useDispatch();
+
+  console.log(chatList);
 
   const inputHandle = (event) => {
     setNewChatName(event.target.value);
@@ -19,7 +25,10 @@ function ChatList({ chatList, setChatList }) {
   };
 
   const addNewChat = (chatName) => {
-    setChatList([{ id: getNewChatId(), name: chatName }, ...chatList]);
+    dispatch({
+      type: "ADD_CHAT",
+      payload: { id: getNewChatId(), name: newChatName },
+    });
   };
 
   const getNewChatId = () => {
@@ -29,8 +38,11 @@ function ChatList({ chatList, setChatList }) {
     return 0;
   };
 
-  const deleteChat = (id) => {
-    setChatList(chatList.filter((chat) => chat.id !== id));
+  const deleteChat = (chat) => {
+    dispatch({
+      type: "DELETE_CHAT",
+      payload: chat,
+    });
   };
 
   return (
@@ -63,10 +75,7 @@ function ChatList({ chatList, setChatList }) {
               <Link className="chatLink" to={`/chats/${chat.id}`}>
                 {chat.name}
               </Link>
-              <button
-                onClick={() => deleteChat(chat.id)}
-                className="deleteButton"
-              >
+              <button className="deleteButton" onClick={() => deleteChat(chat)}>
                 <DeleteOutline />
               </button>
             </div>

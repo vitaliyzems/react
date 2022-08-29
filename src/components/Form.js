@@ -1,11 +1,11 @@
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import { TextField, Button } from "@mui/material";
+import { useDispatch } from "react-redux";
 
-function Form(props) {
+function Form({ id }) {
   let [messageText, setMessageText] = useState("");
   let [messageAuthor, setMessageAuthor] = useState("");
-
-  const inputEl = useRef(null);
+  const dispatch = useDispatch();
 
   const textHandle = (event) => {
     setMessageText((messageText = event.target.value));
@@ -15,30 +15,31 @@ function Form(props) {
     setMessageAuthor((messageAuthor = event.target.value));
   };
 
-  const handler = (event) => {
+  const formHandle = (e) => {
+    e.preventDefault();
     if (messageText && messageAuthor) {
-      const newMessage = {
-        text: messageText,
-        author: messageAuthor,
-        id: Date.now(),
-      };
-      props.addNewMessage(newMessage);
-      setMessageText((messageText = ""));
-      setMessageAuthor((messageAuthor = ""));
-      inputEl.current.focus();
+      dispatch({
+        type: "ADD_MESSAGE",
+        payload: {
+          chatId: id,
+          id: Date.now(),
+          text: messageText,
+          author: messageAuthor,
+        },
+      });
     }
-    event.preventDefault();
+    setMessageText("");
+    setMessageAuthor("");
   };
 
   return (
-    <form className="messageForm" onSubmit={handler}>
+    <form className="messageForm" onSubmit={formHandle}>
       <TextField
         value={messageAuthor}
         onChange={authorHandle}
         id="standard-basic"
         label="Ваше имя"
         variant="standard"
-        inputRef={inputEl}
       />
       <TextField
         value={messageText}
