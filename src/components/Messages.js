@@ -1,9 +1,10 @@
 import React from "react";
 import { useSelector } from "react-redux";
+import { getMessageList } from "../store/msgReducer/selectors";
 import Message from "./Message";
 
 function Messages({ id }) {
-  const messages = useSelector((state) => state.messages.messages);
+  const messages = useSelector(getMessageList);
   const filteredMessages = messages.filter((message) => message.chatId === id);
 
   return (

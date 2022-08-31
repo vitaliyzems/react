@@ -10,8 +10,6 @@ function ChatList() {
   const chatList = useSelector(getChatList);
   const dispatch = useDispatch();
 
-  console.log(chatList);
-
   const inputHandle = (event) => {
     setNewChatName(event.target.value);
   };

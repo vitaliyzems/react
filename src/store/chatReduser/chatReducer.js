@@ -11,7 +11,7 @@ const defaultState = {
 export const chatReducer = (state = defaultState, action) => {
   switch (action.type) {
     case "ADD_CHAT":
-      return { ...state, chats: [action.payload, ...state.chats] };
+      return { ...state, chats: [...state.chats, action.payload] };
     case "DELETE_CHAT":
       return {
         ...state,
