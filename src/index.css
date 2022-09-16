@@ -1,0 +1,167 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+header {
+  background-color: rgb(42, 42, 49);
+}
+
+.mainNav {
+  display: flex;
+  justify-content: center;
+  padding: 20px 0;
+}
+
+.mainNavLink {
+  display: block;
+  font-size: 16px;
+  line-height: 16px;
+  text-align: center;
+  color: white;
+  text-decoration: none;
+  margin-right: 20px;
+  text-transform: uppercase;
+  font-family: sans-serif;
+}
+
+.mainNavLink:last-child {
+  margin-right: 0;
+}
+
+.mainNavLink:hover {
+  text-decoration: underline;
+}
+
+.active {
+  color: rgb(43, 129, 129);
+}
+
+.chatListWrapper {
+  width: fit-content;
+  margin: 0 auto;
+  padding-top: 20px;
+}
+
+.chatList {
+  width: fit-content;
+  margin: 0 auto;
+}
+
+.linkBox {
+  display: flex;
+  justify-content: space-between;
+  width: 300px;
+  align-items: stretch;
+  padding-bottom: 5px;
+}
+
+.chatLink {
+  display: block;
+  text-decoration: none;
+  color: #fff;
+  background-color: rgb(43, 129, 129);
+  flex-grow: 1;
+  margin-right: 5px;
+  border-radius: 5px;
+  height: 100%;
+  text-align: center;
+  line-height: 36.5px;
+  font-size: 16px;
+  text-transform: uppercase;
+  font-family: sans-serif;
+}
+
+.chatLink:hover {
+  text-decoration: underline;
+}
+
+.deleteButton {
+  display: block;
+  border: none;
+  background-color: rgb(255, 129, 129);
+  border-radius: 5px;
+}
+
+.deleteButton:hover {
+  background-color: rgb(200, 100, 100);
+}
+
+.chatPageWrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin-top: 10px;
+}
+
+.chatName {
+  justify-self: center;
+  color: rgb(43, 129, 129);
+}
+
+.messageList {
+  margin-top: 10px;
+  min-height: 150px;
+  grid-row: 2;
+  border: 1px dashed rgb(43, 129, 129);
+  border-radius: 30px;
+}
+
+.messageForm {
+  display: flex;
+  flex-direction: column;
+  width: 450px;
+  justify-self: center;
+  grid-column: 2;
+  grid-row: 2;
+}
+
+.message {
+  margin: 20px;
+  width: fit-content;
+  color: rgb(43, 129, 129);
+  font-family: sans-serif;
+  font-size: 20px;
+}
+
+.modalBotAnswer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, .5);
+}
+
+.modalContent {
+  background-color: #fff;
+  width: 450px;
+  margin: auto;
+}
+
+.modalButton {
+  width: 100%;
+}
+
+.botAnswer {
+  grid-column: 1 / 3;
+  justify-self: center;
+  width: 100%;
+}
+
+.transparent {
+  opacity: .3;
+  font-size: 18px;
+}
+
+.authWrapper {
+  width: 400px;
+  margin: 0 auto;
+}
