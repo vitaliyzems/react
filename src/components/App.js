@@ -1,11 +1,11 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
-import HomePage from "./pages/HomePage.js";
-import ChatsPage from "./pages/ChatsPage.js";
-import ProfilePage from "./pages/ProfilePage.js";
-import Layout from "./components/Layout.jsx";
-import SingleChatPage from "./pages/SingleChatPage.jsx";
-import NotFoundPage from "./pages/NotFoundPage";
+import HomePage from "../pages/HomePage.js";
+import ChatsPage from "../pages/ChatsPage.js";
+import ProfilePage from "../pages/ProfilePage.js";
+import Layout from "./Layout.jsx";
+import SingleChatPage from "../pages/SingleChatPage.jsx";
+import NotFoundPage from "../pages/NotFoundPage";
 
 function App() {
   return (

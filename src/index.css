@@ -1,3 +1,8 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
 .container {
   max-width: 960px;
   margin: 0 auto;
@@ -90,6 +95,7 @@ header {
 .chatPageWrapper {
   display: grid;
   grid-template-columns: 1fr 1fr;
+  margin-top: 10px;
 }
 
 .chatName {
@@ -98,6 +104,8 @@ header {
 }
 
 .messageList {
+  margin-top: 10px;
+  min-height: 150px;
   grid-row: 2;
   border: 1px dashed rgb(43, 129, 129);
   border-radius: 30px;
@@ -151,4 +159,9 @@ header {
 .transparent {
   opacity: .3;
   font-size: 18px;
+}
+
+.authWrapper {
+  width: 400px;
+  margin: 0 auto;
 }

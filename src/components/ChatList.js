@@ -1,14 +1,25 @@
 import { DeleteOutline } from "@mui/icons-material";
 import { Button, TextField } from "@mui/material";
-import React, { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import {
+  deleteChat,
+  fetchChats,
+  updateChats,
+} from "../store/chatReduser/actions";
 import { getChatList } from "../store/chatReduser/selectors";
+import { getUser } from "../store/profileReducer/selectors";
 
 function ChatList() {
   let [newChatName, setNewChatName] = useState("");
   const chatList = useSelector(getChatList);
+  const user = useSelector(getUser);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchChats(user.uid));
+  }, [dispatch, user.uid]);
 
   const inputHandle = (event) => {
     setNewChatName(event.target.value);
@@ -17,16 +28,10 @@ function ChatList() {
   const formHandle = (event) => {
     event.preventDefault();
     if (newChatName) {
-      addNewChat(newChatName);
+      const newChat = { id: getNewChatId(), name: newChatName };
+      updateChats([...chatList, newChat], user.uid);
     }
     setNewChatName("");
-  };
-
-  const addNewChat = (chatName) => {
-    dispatch({
-      type: "ADD_CHAT",
-      payload: { id: getNewChatId(), name: newChatName },
-    });
   };
 
   const getNewChatId = () => {
@@ -36,11 +41,8 @@ function ChatList() {
     return 0;
   };
 
-  const deleteChat = (chat) => {
-    dispatch({
-      type: "DELETE_CHAT",
-      payload: chat,
-    });
+  const removeChat = (id) => {
+    deleteChat(chatList, id, user.uid);
   };
 
   return (
@@ -73,7 +75,10 @@ function ChatList() {
               <Link className="chatLink" to={`/chats/${chat.id}`}>
                 {chat.name}
               </Link>
-              <button className="deleteButton" onClick={() => deleteChat(chat)}>
+              <button
+                className="deleteButton"
+                onClick={() => removeChat(chat.id)}
+              >
                 <DeleteOutline />
               </button>
             </div>
